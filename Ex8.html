@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script>
+var app = angular.module("myApp", []);
+app.controller("mycontrol", function ($scope) {
+$scope.items = [];
+$scope.price = [];
+$scope.addItem = function () {
+$scope.items.push($scope.itemname);
+$scope.price.push($scope.itemprice);
+}
+$scope.remove = function($index) {
+$scope.items.splice($index, 1);
+$scope.price.splice($index, 1);
+
+}
+});
+</script>
+</head>
+<body align="center" ng-app="myApp" ng-controller="mycontrol">
+<p><h1 style="color:blue;font-size: 100;"><b>Product Inventory
+    System</b></h1></p>
+<p style="color:blue">Enter the Product Name</p><input type="text" ng-model="itemname" placeholder="enter product name"><br>
+<p style="color:blue">Enter the Product Price</p><input type="text" ng-model="itemprice" placeholder="enter product price"><br><br>
+<button ng-click="addItem()">Add Product</button>
+<hr>
+<br><br>
+<br><br>
+<table border="1" cellspacing="0" width="50%">
+<tr style="background-color:green;color:white;">
+<th>S.No</th>
+<th>Name</th>
+<th>Price</th>
+<th>Remove</th>
+</tr>
+<tr ng-repeat="x in items"  class="table w-100 mx-auto mt-5 table-bordered table-hover text-center">
+<td>{{$index + 1}}</td>
+<td>{{x}}</td>
+<td>{{price[$index]}}</td>
+<td><button ng-click="remove($index)" style="color:red;">[delete]</button></td>
+</tr>
+</table>
+</body>
+</html>
